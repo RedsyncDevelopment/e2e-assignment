@@ -1,13 +1,23 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useAppDispatch } from "./app/hooks";
 import Airlines from "./components/airlines/Airlines";
 import Airports from "./components/airports/Airports";
-import Map from "./components/map/Map";
+import Home from "./components/home/Home";
 import NotFound from "./components/UI/NotFound";
+import { initializeAirlines } from "./features/airline/airlineSlice";
+import { initializeAirports } from "./features/airport/airportSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(initializeAirlines());
+    dispatch(initializeAirports());
+  }, [dispatch]);
+
   return (
     <Routes>
-      <Route path="/" element={<Map />} />
+      <Route path="/" element={<Home />} />
       <Route path="/airports" element={<Airports />} />
       <Route path="/airlines" element={<Airlines />} />
       <Route path="*" element={<NotFound />} />
