@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { createAirport } from "../../features/airport/airportSlice";
 import { Airport } from "../../types";
@@ -14,13 +14,17 @@ const AirportForm: React.FC<AirportFormProps> = ({ location }) => {
 
   const [airportName, setAirportName] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-  const [isAirlineChecked, setIsAirlineChecked] = useState<boolean[]>(
-    new Array(airlines?.length).fill(false)
-  );
+  const [isAirlineChecked, setIsAirlineChecked] = useState<boolean[]>([]);
   const [inputLat, setInputLat] = useState<string>("");
   const [inputLng, setInputLng] = useState<string>("");
 
+  // when componenet mounts - set checkbox state to false
+  useEffect(() => {
+    setIsAirlineChecked(new Array(airlines.length).fill(false));
+  }, [airlines.length]);
+
   const handleChange = (position: number) => {
+    // add true to poistion of checked airport
     const updatedCheckedList = isAirlineChecked.map((item, index) =>
       index === position ? !item : item
     );
@@ -90,7 +94,7 @@ const AirportForm: React.FC<AirportFormProps> = ({ location }) => {
         ))}
       </select>
       <div className="border-2 p-4">
-        <h2>Select airline</h2>
+        <h2>Select airlines: </h2>
         {airlines?.map((airline, index) => (
           <div className="flex gap-2" key={airline.id}>
             <input
@@ -98,7 +102,8 @@ const AirportForm: React.FC<AirportFormProps> = ({ location }) => {
               type="checkbox"
               value={airline.name}
               name={airline.name}
-              checked={isAirlineChecked[index]}
+              // uncontrolled input hack
+              checked={isAirlineChecked[index] || false}
               onChange={() => handleChange(index)}
             />
             <label htmlFor={airline.id}>

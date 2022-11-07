@@ -57,4 +57,29 @@ airportRouter.post("/", async (request: Request, response: Response) => {
   response.send(newAirport);
 });
 
+// DELETE Requests
+
+airportRouter.delete("/:id", async (request: Request, response: Response) => {
+  const id = request.params.id;
+  if (!id) response.status(400).end();
+
+  const airportToDelete = await prisma.airport.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!airportToDelete) {
+    response.status(400).end();
+  } else {
+    await prisma.airport.delete({
+      where: {
+        id,
+      },
+    });
+
+    response.status(204).end();
+  }
+});
+
 export default airportRouter;

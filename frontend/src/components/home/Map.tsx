@@ -57,6 +57,7 @@ const Map: React.FC<MapProps> = ({}) => {
             key={airport.id}
             position={airport.location}
             onClick={() => handleActiveMarker(airport.id!)}
+            icon="http://maps.google.com/mapfiles/kml/pal2/icon48.png"
           >
             {activeMarker === airport.id && (
               <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
@@ -70,6 +71,7 @@ const Map: React.FC<MapProps> = ({}) => {
           <MarkerF
             position={newAirportMarker}
             onLoad={() => setInfoWindow(true)}
+            icon="http://maps.google.com/mapfiles/kml/pal2/icon48.png"
           >
             {infoWindow && (
               <InfoWindowF

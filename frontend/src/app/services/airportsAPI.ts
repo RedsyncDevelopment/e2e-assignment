@@ -13,9 +13,15 @@ const createNew = async (airport: Airport) => {
   return response.data;
 };
 
+const deleteOne = async (id: string) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+  return response.data;
+};
+
 const airportService = {
   getAll,
   createNew,
+  deleteOne,
 };
 
 export default airportService;

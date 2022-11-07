@@ -15,7 +15,7 @@ const AirlineInfo: React.FC<AirlineInfoProps> = ({ airline }) => {
       <div>
         <p>Can be found at:</p>
         {airline.airports?.map((airport) => (
-          <p>- {airport.name}</p>
+          <p key={airport.id}>- {airport.name}</p>
         ))}
       </div>
     </div>
