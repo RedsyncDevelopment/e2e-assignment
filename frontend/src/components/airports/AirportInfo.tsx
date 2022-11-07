@@ -12,7 +12,7 @@ const AirportInfo: React.FC<AirportInfoProps> = ({ airport }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex gap-4 p-4">
       <div>
         <h1>Name: {airport.name}</h1>
         <h2>Country: {airport.country?.name}</h2>
