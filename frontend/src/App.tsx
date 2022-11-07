@@ -7,12 +7,14 @@ import Home from "./components/home/Home";
 import NotFound from "./components/UI/NotFound";
 import { initializeAirlines } from "./features/airline/airlineSlice";
 import { initializeAirports } from "./features/airport/airportSlice";
+import { initializeCountries } from "./features/country/countrySlice";
 
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(initializeAirlines());
     dispatch(initializeAirports());
+    dispatch(initializeCountries());
   }, [dispatch]);
 
   return (

@@ -12,15 +12,28 @@ const airlineSlice = createSlice({
     setAirlines: (state, action) => {
       return action.payload;
     },
+    appendAirline: (state, action) => {
+      state.push(action.payload);
+    },
+    viewAirline: (state, action) => {
+      console.log(action.payload);
+    },
   },
 });
 
-export const { setAirlines } = airlineSlice.actions;
+export const { setAirlines, appendAirline, viewAirline } = airlineSlice.actions;
 
 export const initializeAirlines = (): AppThunk => {
   return async (dispatch) => {
     const airlines = await airlineService.getAll();
     dispatch(setAirlines(airlines));
+  };
+};
+
+export const createAirline = (content: Airline): AppThunk => {
+  return async (dispatch) => {
+    const newAirline = await airlineService.createNew(content);
+    dispatch(appendAirline(newAirline));
   };
 };
 

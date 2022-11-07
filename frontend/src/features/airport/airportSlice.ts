@@ -12,15 +12,25 @@ const airportSlice = createSlice({
     setAirports: (state, action) => {
       return action.payload;
     },
+    appendAirport: (state, action) => {
+      state.push(action.payload);
+    },
   },
 });
 
-export const { setAirports } = airportSlice.actions;
+export const { setAirports, appendAirport } = airportSlice.actions;
 
 export const initializeAirports = (): AppThunk => {
   return async (dispatch) => {
     const airports = await airportService.getAll();
     dispatch(setAirports(airports));
+  };
+};
+
+export const createAirport = (content: Airport): AppThunk => {
+  return async (dispatch) => {
+    const newAirport = await airportService.createNew(content);
+    dispatch(appendAirport(newAirport));
   };
 };
 

@@ -7,3 +7,5 @@ export const options = {
   disableDefaultUI: true,
   clickableIcons: false,
 };
+
+export const googleMapsAPIKey: string = process.env.REACT_APP_GOOGLE_MAPS_API!;
