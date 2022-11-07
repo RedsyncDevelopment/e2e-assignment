@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import airlineService from "../../app/services/airlinesAPI";
 import { AppThunk } from "./../../app/store";
 import { Airline } from "./../../types.d";
-import airlineService from "./airlinesAPI";
 
 const initialState: Airline[] = [];
 

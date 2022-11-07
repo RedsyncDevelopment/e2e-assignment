@@ -1,9 +1,13 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import airlineSlice from "../features/airline/airlineSlice";
+import airportSlice from "../features/airport/airportSlice";
+import countrySlice from "../features/country/countrySlice";
 
 export const store = configureStore({
   reducer: {
     airline: airlineSlice,
+    airport: airportSlice,
+    country: countrySlice,
   },
 });
 
