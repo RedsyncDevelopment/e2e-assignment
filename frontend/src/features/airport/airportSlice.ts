@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import airlineService from "../../app/services/airlinesAPI";
 import airportService from "../../app/services/airportsAPI";
 import { AppThunk } from "../../app/store";
+import { setAirlines } from "../airline/airlineSlice";
 import { Airport } from "./../../types.d";
 
 const initialState: Airport[] = [];
@@ -59,6 +61,9 @@ export const updateAirport = (id: string, airport: Airport): AppThunk => {
   return async (dispatch) => {
     const updatedAirport = await airportService.updateOne(id, airport);
     dispatch(updateAirportState(updatedAirport));
+    // hmm?? not sure if it's correct way of updating airlines
+    const airlines = await airlineService.getAll();
+    dispatch(setAirlines(airlines));
   };
 };
 
