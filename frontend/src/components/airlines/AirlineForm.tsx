@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { createAirline } from "../../features/airline/airlineSlice";
 import { Airline } from "../../types";
+import SelectCountry from "../UI/SelectCountry";
 
-interface AirlineFormProps {}
-
-const AirlineForm: React.FC<AirlineFormProps> = ({}) => {
+const AirlineForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const countries = useAppSelector(({ country }) => country);
 
@@ -31,21 +30,14 @@ const AirlineForm: React.FC<AirlineFormProps> = ({}) => {
         value={airlineName}
         className="p-4 border-2"
       />
-      <select
+      <SelectCountry
+        countries={countries}
         onChange={(e) => setSelectedCountry(e.target.value)}
         name="countries"
         id="country-select"
         value={selectedCountry}
-        className="p-4 border-2"
-      >
-        <option value="">--Please choose an option--</option>
-        {countries?.map((country) => (
-          <option key={country.id} value={country.code}>
-            {country.name}
-          </option>
-        ))}
-      </select>
-      <button type="submit" className="p-4 border-2  bg-green-300">
+      />
+      <button type="submit" className="add-btn">
         Add Airline
       </button>
     </form>

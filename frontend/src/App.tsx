@@ -4,6 +4,7 @@ import { useAppDispatch } from "./app/hooks";
 import Airlines from "./components/airlines/Airlines";
 import Airports from "./components/airports/Airports";
 import Home from "./components/home/Home";
+import AvailableRoutes from "./components/routes/AvailableRoutes";
 import NotFound from "./components/UI/NotFound";
 import { initializeAirlines } from "./features/airline/airlineSlice";
 import { initializeAirports } from "./features/airport/airportSlice";
@@ -22,6 +23,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/airports" element={<Airports />} />
       <Route path="/airlines" element={<Airlines />} />
+      <Route path="/routes" element={<AvailableRoutes />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

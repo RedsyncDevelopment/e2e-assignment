@@ -18,10 +18,20 @@ const airportSlice = createSlice({
     removeAirport: (state, action) => {
       return state.filter((airport) => airport.id !== action.payload);
     },
+    updateAirportState: (state, action) => {
+      const updatedAirport = action.payload;
+      const airportToUpdate = state.find(
+        (airport) => airport.id === updatedAirport.id
+      );
+      const airportToDisplay = { ...updatedAirport };
+      return state.map((airport) =>
+        airport.id !== airportToUpdate?.id ? airport : airportToDisplay
+      );
+    },
   },
 });
 
-export const { setAirports, appendAirport, removeAirport } =
+export const { setAirports, appendAirport, removeAirport, updateAirportState } =
   airportSlice.actions;
 
 export const initializeAirports = (): AppThunk => {
@@ -42,6 +52,13 @@ export const deleteAirport = (id: string): AppThunk => {
   return async (dispatch) => {
     await airportService.deleteOne(id);
     dispatch(removeAirport(id));
+  };
+};
+
+export const updateAirport = (id: string, airport: Airport): AppThunk => {
+  return async (dispatch) => {
+    const updatedAirport = await airportService.updateOne(id, airport);
+    dispatch(updateAirportState(updatedAirport));
   };
 };
 

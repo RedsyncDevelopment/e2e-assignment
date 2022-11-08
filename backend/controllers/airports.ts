@@ -82,4 +82,64 @@ airportRouter.delete("/:id", async (request: Request, response: Response) => {
   }
 });
 
+// PUT Requests
+
+airportRouter.put("/:id", async (request: Request, response: Response) => {
+  const id = request.params.id;
+  const body = request.body;
+
+  if (!body.name || !body.country || !body.location)
+    return response.status(400).end();
+
+  // find airport which we want to update
+  const airportToUpdate = await prisma.airport.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!airportToUpdate) {
+    response.status(400).end();
+  } else {
+    // find country and country ID
+    const country = await prisma.country.findFirst({
+      where: {
+        code: body.country.code,
+      },
+    });
+    const countryId = country?.id;
+    if (!countryId) return response.status(400).end();
+
+    // create new airlines array from updated airlines
+    const airlinesIDArray = body.airlines.map((airline: any) => {
+      return { id: airline.id };
+    });
+
+    const updatedAirport = await prisma.airport.update({
+      where: {
+        id: airportToUpdate.id,
+      },
+      data: {
+        name: body.name,
+        location: body.location,
+        country: {
+          connect: {
+            id: countryId,
+          },
+        },
+        airlines: {
+          set: [],
+          connect: airlinesIDArray,
+        },
+      },
+      include: {
+        country: true,
+        airlines: true,
+      },
+    });
+
+    response.json(updatedAirport);
+  }
+});
+
 export default airportRouter;

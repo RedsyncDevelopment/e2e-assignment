@@ -18,3 +18,5 @@ export interface Country {
   name: string;
   code: string;
 }
+
+export type GoogleLatLng = google.maps.LatLng | null;

@@ -13,9 +13,21 @@ const createNew = async (airline: Airline) => {
   return response.data;
 };
 
+const deleteOne = async (id: string) => {
+  const respose = await axios.delete(`${baseUrl}/${id}`);
+  return respose.status;
+};
+
+const updateOne = async (id: string, airline: Airline) => {
+  const response = await axios.put(`${baseUrl}/${id}`, airline);
+  return response.data;
+};
+
 const airlineService = {
   getAll,
   createNew,
+  deleteOne,
+  updateOne,
 };
 
 export default airlineService;

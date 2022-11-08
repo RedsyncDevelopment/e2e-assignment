@@ -1,44 +1,43 @@
 import { GoogleMap, InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useState } from "react";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useInitialMapSetup,
-} from "../../app/hooks";
+import { useAppSelector, useInitialMapSetup } from "../../app/hooks";
+import { GoogleLatLng } from "../../types";
 import { center, options } from "../../utils/constants";
-import AirportInfo from "../airports/AirportInfo";
+import AirportMarker from "./AirportMarker";
 import MarkerForm from "./MarkerForm";
 
-interface MapProps {}
-
-const Map: React.FC<MapProps> = ({}) => {
+const Map: React.FC = () => {
   // initialize Map with custom hook
   const { mapCenter, mapOptions, mapRef, onLoad } = useInitialMapSetup(
     center,
     options
   );
 
-  // instantitae dispatch with typesafe hook
-  const dispatch = useAppDispatch();
   // useAppSelector() is just typesafe useSelector() hook
   const airports = useAppSelector(({ airport }) => airport);
 
-  const [newAirportMarker, setNewAirportMarker] =
-    useState<google.maps.LatLng | null>(null);
+  const [newAirportMarker, setNewAirportMarker] = useState<GoogleLatLng>(null);
   const [infoWindow, setInfoWindow] = useState<boolean>(false);
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
 
+  // add temporary marker to map on click
   const addNewAirportMarker = (e: google.maps.MapMouseEvent) => {
+    // add new temporary marker to map position
     setNewAirportMarker(e.latLng!);
     mapRef.current?.panTo(e.latLng!);
+    // close existing airports marker if open
     setActiveMarker(null);
   };
 
-  const handleActiveMarker = (marker: string) => {
+  // open infoWindow when user clicks on marker
+  const openInfoWindow = (marker: string) => {
     if (marker === activeMarker) {
       return;
     }
     setActiveMarker(marker);
+    // close newAirportMarker if open
+    setNewAirportMarker(null);
+    setInfoWindow(false);
   };
 
   return (
@@ -51,25 +50,21 @@ const Map: React.FC<MapProps> = ({}) => {
         onLoad={onLoad}
         onClick={addNewAirportMarker}
       >
-        {/* render airports */}
+        {/* render already existing airports with infoWindows */}
         {airports?.map((airport) => (
-          <MarkerF
+          <AirportMarker
             key={airport.id}
-            position={airport.location}
-            onClick={() => handleActiveMarker(airport.id!)}
-            icon="http://maps.google.com/mapfiles/kml/pal2/icon48.png"
-          >
-            {activeMarker === airport.id && (
-              <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                <AirportInfo airport={airport} />
-              </InfoWindowF>
-            )}
-          </MarkerF>
+            airport={airport}
+            activeMarker={activeMarker}
+            onMarkerOpen={openInfoWindow}
+            onMarkerClose={() => setActiveMarker(null)}
+          />
         ))}
         {/* render new marker when user clicks on map with form to add new airport to that position */}
         {newAirportMarker && (
           <MarkerF
             position={newAirportMarker}
+            // add info window to marker when it's done loading
             onLoad={() => setInfoWindow(true)}
             icon="http://maps.google.com/mapfiles/kml/pal2/icon48.png"
           >

@@ -15,8 +15,12 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Navigation />
-        <App />
+        <header>
+          <Navigation />
+        </header>
+        <main>
+          <App />
+        </main>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

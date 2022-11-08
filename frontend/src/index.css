@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-link {
+    @apply p-4 border-2 w-64 flex justify-center hover:bg-slate-500;
+  }
+  .add-btn {
+    @apply p-4 border-2 bg-green-300 hover:bg-green-400;
+  }
+  .update-btn {
+    @apply p-4 border-2 bg-green-300 hover:bg-green-400;
+  }
+  .edit-btn {
+    @apply p-4 bg-blue-300 w-full hover:bg-blue-400;
+  }
+  .delete-btn {
+    @apply p-4 bg-red-300 w-full hover:bg-red-400;
+  }
+}
