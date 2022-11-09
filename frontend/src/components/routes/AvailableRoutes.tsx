@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowRight, AiOutlineCheckCircle } from "react-icons/ai";
 import { useAppSelector } from "../../app/hooks";
 import SelectCountry from "../UI/SelectCountry";
 
@@ -12,10 +12,14 @@ const AvailableRoutes: React.FC<AvailableRoutesProps> = ({}) => {
 
   const [departingCountry, setDepartingCountry] = useState<string>("");
   const [destinationCountry, setDestinationCountry] = useState<string>("");
+  const [departingAirport, setDepartingAirport] = useState<string>("");
+  const [destinationAirport, setDestinationAirport] = useState<string>("");
 
   return (
-    <div className="grid grid-cols-2 grid-rows-4 gap-y-6 justify-items-center">
-      <h1 className="p-6 text-2xl font-bold col-span-2">Where Can You Get?</h1>
+    <div className="grid grid-cols-2 gap-y-6 justify-items-center auto-rows-min">
+      <h1 className="py-12 text-4xl font-bold col-span-2">
+        Where Can You Get?
+      </h1>
 
       <div className="flex flex-col items-center space-y-4">
         <div>From: </div>
@@ -43,35 +47,71 @@ const AvailableRoutes: React.FC<AvailableRoutesProps> = ({}) => {
         {!departingCountry ? (
           <div>Please Select a Country</div>
         ) : (
-          <select className="p-4 border-2">
-            {countries?.map((country) => (
-              <option key={country.id} value={country.code}>
-                {country.name}
-              </option>
-            ))}
+          <select
+            value={departingAirport}
+            onChange={(e) => setDepartingAirport(e.target.value)}
+            name="departing-airport"
+            className="p-4 border-2 w-96"
+          >
+            <option value="">-- Select an Airport --</option>
+            {airports.map((airport) =>
+              airport.country?.code === departingCountry ? (
+                <option key={airport.id} value={airport.id}>
+                  {airport.name}
+                </option>
+              ) : null
+            )}
           </select>
         )}
       </div>
       <div className="flex flex-col items-center space-y-4">
         <div className="flex flex-col items-center space-y-4">
           <div>Airport: </div>
-          {!departingCountry ? (
+          {!destinationCountry ? (
             <div>Please Select a Country</div>
           ) : (
-            <select className="p-4 border-2">
-              {countries?.map((country) => (
-                <option key={country.id} value={country.code}>
-                  {country.name}
-                </option>
-              ))}
+            <select
+              value={destinationAirport}
+              onChange={(e) => setDestinationAirport(e.target.value)}
+              name="departing-airport"
+              className="p-4 border-2 w-96"
+            >
+              <option value="">-- Select an Airport --</option>
+              {airports.map((airport) =>
+                airport.country?.code === destinationCountry ? (
+                  <option key={airport.id} value={airport.id}>
+                    {airport.name}
+                  </option>
+                ) : null
+              )}
             </select>
           )}
         </div>
       </div>
       <div className="pt-16 col-span-2 flex flex-col items-center space-y-4">
-        <p>Available Airlines on That Route:</p>
-        <ul>
-          <li>test</li>
+        <p className="text-xl font-bold">Available Airlines on That Route:</p>
+        <ul className="flex flex-col gap-2">
+          {airlines.map((airline) => {
+            if (
+              airline.airports
+                ?.map((airport) => airport.id)
+                .includes(departingAirport) &&
+              airline.airports
+                ?.map((airport) => airport.id)
+                .includes(destinationAirport)
+            ) {
+              return (
+                <li key={airline.id} className="flex items-center gap-4">
+                  <span>
+                    <AiOutlineCheckCircle />
+                  </span>
+                  <span className="text-lg">{airline.name}</span>
+                </li>
+              );
+            } else {
+              return null;
+            }
+          })}
         </ul>
       </div>
     </div>
