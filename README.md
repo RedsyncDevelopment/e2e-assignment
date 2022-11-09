@@ -37,12 +37,32 @@ docker-compose up --build --force-recreate
 
 #### Node w/ Postgres
 
-### Frontend (React Application):
+If you have NodeJS and Postgres already installed on you local machine first thing you need to do is create a new Database User and a Database. For testing perpose it's best to create:
 
-#### Prerequisits:
+- user: postgres
+- password: postgres
+- DB Name: AirportApplication
 
-NodeJS >= v16.0
+That way there is no need to customize URI to database to fit Prisma connection.
 
+After that you can navigate to .\backend folder inside source directory and run
+
+```bash
+npm run dev
 ```
 
+After you have your server running you can start your frontend application.
+
+### Frontend (React Application):
+
+To run Server with Database from source directory first run a comand
+
+```bash
+cd .\fronend\
+```
+
+And after that you start React Application in development mode with
+
+```bash
+npm start
 ```
