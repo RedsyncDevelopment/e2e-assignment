@@ -14,14 +14,26 @@ git clone "https://github.com/RedsyncDevelopment/e2e-assignment.git"
 
 ### Backend (Server):
 
-After you cloned this project to your local machine you need to add .env file as found in example.env file. This is crutial - Database and Server won't work if you don't add those variables to .env file.
+After you cloned this project to your local machine you need to copy values from example.env file to newly create .env file. This is crutial - Database and Server won't work if you don't add those variables to .env file.
 
 To run server localy you have 2 different options:
 
-1. Using Docker
+1. Using Docker - need to have Docker Desktop install on your local machine
 2. Using NodeJS >= v16 with Postres already installed on your local machine
 
 #### Docker
+
+To run Server with Database from source directory first run a comand
+
+```bash
+cd .\backend\
+```
+
+And after that you can run Docker with
+
+```bash
+docker-compose up --build --force-recreate
+```
 
 #### Node w/ Postgres
 
