@@ -10,6 +10,11 @@ Navigate to desired folder and run
 git clone "https://github.com/RedsyncDevelopment/e2e-assignment.git"
 ```
 
+## IMPORTANT!
+
+For this app to run properly you need to have GOOGLE MAPS API KEY
+Add this key to .\frontend\.env as described in .\frontend\example.env
+
 ## How To Run?
 
 ### Backend (Server):
