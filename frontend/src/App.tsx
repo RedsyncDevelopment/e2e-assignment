@@ -6,9 +6,9 @@ import Airports from "./components/airports/Airports";
 import Home from "./components/home/Home";
 import AvailableRoutes from "./components/routes/AvailableRoutes";
 import NotFound from "./components/UI/NotFound";
-import { initializeAirlines } from "./features/airline/airlineSlice";
-import { initializeAirports } from "./features/airport/airportSlice";
-import { initializeCountries } from "./features/country/countrySlice";
+import { initializeAirlines } from "./reducers/airlineSlice";
+import { initializeAirports } from "./reducers/airportSlice";
+import { initializeCountries } from "./reducers/countrySlice";
 
 function App() {
   const dispatch = useAppDispatch();

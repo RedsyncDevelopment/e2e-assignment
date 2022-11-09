@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import useAppDispatch from "../../app/hooks/useAppDispatch";
-import { deleteAirport } from "../../features/airport/airportSlice";
+import { deleteAirport } from "../../reducers/airportSlice";
 import { Airport } from "../../types";
 import UpdateAirport from "./UpdateAirport";
 
@@ -51,7 +51,10 @@ const AirportInfo: React.FC<AirportInfoProps> = ({ airport }) => {
           </div>
         </>
       ) : (
-        <UpdateAirport airport={airport} />
+        <UpdateAirport
+          onUpdate={() => setIsEditOpen(false)}
+          airport={airport}
+        />
       )}
       <div className="w-full flex space-x-2">
         <button

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import countryService from "../../app/services/countriesAPI";
-import { AppThunk } from "./../../app/store";
-import { Country } from "./../../types.d";
+import countryService from "../app/services/countriesAPI";
+import { AppThunk } from "../app/store";
+import { Country } from "../types";
 
 const initialState: Country[] = [];
 

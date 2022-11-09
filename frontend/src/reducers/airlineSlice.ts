@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import airlineService from "../../app/services/airlinesAPI";
-import airportService from "../../app/services/airportsAPI";
-import { setAirports } from "../airport/airportSlice";
-import { AppThunk } from "./../../app/store";
-import { Airline } from "./../../types.d";
+import airlineService from "../app/services/airlinesAPI";
+import airportService from "../app/services/airportsAPI";
+import { AppThunk } from "../app/store";
+import { Airline } from "../types";
+import { setAirports } from "./airportSlice";
 
 const initialState: Airline[] = [];
 

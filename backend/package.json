@@ -4,7 +4,9 @@
   "description": "Server for Airports App",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only index.ts",
+    "generate:prisma": "npx prisma migrate dev --name init && npx prisma db seed",
+    "server": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only index.ts",
+    "dev": "npm run generate:prisma && npm run server",
     "start": "cross-env NODE_ENV=production node index.js"
   },
   "author": "Ivan Horvat",

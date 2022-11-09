@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import useAppDispatch from "../../app/hooks/useAppDispatch";
 import useAppSelector from "../../app/hooks/useAppSelector";
 
-import { updateAirport } from "../../features/airport/airportSlice";
+import { updateAirport } from "../../reducers/airportSlice";
 import { Airport } from "../../types";
 import CheckboxAirlines from "../UI/CheckboxAirlines";
 import SelectCountry from "../UI/SelectCountry";
 
 interface UpdateAirportProps {
   airport: Airport;
+  onUpdate: () => void;
 }
 
-const UpdateAirport: React.FC<UpdateAirportProps> = ({ airport }) => {
+const UpdateAirport: React.FC<UpdateAirportProps> = ({ airport, onUpdate }) => {
   const dispatch = useAppDispatch();
   const countries = useAppSelector(({ country }) => country);
   const airlines = useAppSelector(({ airline }) => airline);
@@ -62,6 +63,7 @@ const UpdateAirport: React.FC<UpdateAirportProps> = ({ airport }) => {
       airlines: selectedAirlines,
     };
     dispatch(updateAirport(airport.id!, updatedAirport));
+    onUpdate();
   };
 
   return (

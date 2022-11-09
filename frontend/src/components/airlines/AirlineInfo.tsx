@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import useAppDispatch from "../../app/hooks/useAppDispatch";
-import { deleteAirline } from "../../features/airline/airlineSlice";
+import { deleteAirline } from "../../reducers/airlineSlice";
 import { Airline } from "../../types";
 import UpdateAirline from "./UpdateAirline";
 
@@ -39,7 +39,10 @@ const AirlineInfo: React.FC<AirlineInfoProps> = ({ airline }) => {
           </div>
         </>
       ) : (
-        <UpdateAirline airline={airline} />
+        <UpdateAirline
+          onUpdate={() => setIsEditOpen(false)}
+          airline={airline}
+        />
       )}
       <div className="w-full flex space-x-2">
         <button

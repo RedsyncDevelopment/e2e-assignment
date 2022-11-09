@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  #1. database
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  #2. server
+  node-api:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node-server
+    depends_on:
+      - postgres
+    ports:
+      - "3001:3001"
+    restart: always
+
+volumes:
+  pgdata:
