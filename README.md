@@ -48,6 +48,10 @@ That way there is no need to customize URI to database to fit Prisma connection.
 After that you can navigate to .\backend folder inside source directory and run
 
 ```bash
+npm install
+```
+
+```bash
 npm run dev
 ```
 
@@ -55,13 +59,17 @@ After you have your server running you can start your frontend application.
 
 ### Frontend (React Application):
 
-To run Server with Database from source directory first run a comand
+To run React application, from source folder run comand
 
 ```bash
 cd .\frontend\
 ```
 
-And after that you start React Application in development mode with
+And after that you install dependencies and start React Application in development mode with
+
+```bash
+npm install
+```
 
 ```bash
 npm start
