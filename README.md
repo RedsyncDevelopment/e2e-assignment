@@ -14,7 +14,7 @@ git clone "https://github.com/RedsyncDevelopment/e2e-assignment.git"
 
 ### Backend (Server):
 
-After you cloned this project to your local machine you need to add .env file as found in example.env file
+After you cloned this project to your local machine you need to add .env file as found in example.env file. This is crutial - Database and Server won't work if you don't add those variables to .env file.
 
 To run server localy you have 2 different options:
 

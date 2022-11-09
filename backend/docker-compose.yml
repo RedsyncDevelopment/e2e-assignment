@@ -6,9 +6,13 @@ services:
     image: postgres:latest
     container_name: postgres
     hostname: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     restart: unless-stopped
+
     volumes:
       - pgdata:/var/lib/postgresql/data
 
