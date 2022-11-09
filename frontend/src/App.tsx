@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch } from "./app/hooks";
+import useAppDispatch from "./app/hooks/useAppDispatch";
 import Airlines from "./components/airlines/Airlines";
 import Airports from "./components/airports/Airports";
 import Home from "./components/home/Home";

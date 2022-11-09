@@ -2,14 +2,14 @@ import React from "react";
 
 import { Airline } from "../../types";
 
-interface SelectAirlinesProps
+interface CheckboxAirlinesProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   airlines: Airline[];
   isAirlineChecked: boolean[];
   onAirlineChange: (position: number) => void;
 }
 
-const SelectAirlines: React.FC<SelectAirlinesProps> = ({
+const CheckboxAirlines: React.FC<CheckboxAirlinesProps> = ({
   airlines,
   isAirlineChecked,
   onAirlineChange,
@@ -38,4 +38,4 @@ const SelectAirlines: React.FC<SelectAirlinesProps> = ({
   );
 };
 
-export default SelectAirlines;
+export default CheckboxAirlines;

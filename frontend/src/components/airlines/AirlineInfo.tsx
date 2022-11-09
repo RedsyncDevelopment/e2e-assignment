@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { useAppDispatch } from "../../app/hooks";
+import useAppDispatch from "../../app/hooks/useAppDispatch";
 import { deleteAirline } from "../../features/airline/airlineSlice";
 import { Airline } from "../../types";
 import UpdateAirline from "./UpdateAirline";

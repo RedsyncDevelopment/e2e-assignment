@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import useAppDispatch from "../../app/hooks/useAppDispatch";
+import useAppSelector from "../../app/hooks/useAppSelector";
 import { updateAirline } from "../../features/airline/airlineSlice";
 import { Airline } from "../../types";
-import SelectAirports from "../UI/SelectAirports";
+import CheckboxAirports from "../UI/CheckboxAirports";
 import SelectCountry from "../UI/SelectCountry";
 
 interface UpdateAirlineProps {
@@ -69,7 +70,7 @@ const UpdateAirline: React.FC<UpdateAirlineProps> = ({ airline }) => {
         id="country-select"
         value={selectedCountry}
       />
-      <SelectAirports
+      <CheckboxAirports
         airports={airports}
         type="checkbox"
         isAirportChecked={isAirportChecked}

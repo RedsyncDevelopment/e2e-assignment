@@ -1,6 +1,8 @@
 import { GoogleMap, InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useState } from "react";
-import { useAppSelector, useInitialMapSetup } from "../../app/hooks";
+import useAppSelector from "../../app/hooks/useAppSelector";
+import useInitialMapSetup from "../../app/hooks/useInitialMapSetup";
+
 import { GoogleLatLng } from "../../types";
 import { center, options } from "../../utils/constants";
 import AirportMarker from "./AirportMarker";

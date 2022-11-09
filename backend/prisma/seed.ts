@@ -25,6 +25,16 @@ const main = async () => {
   });
   const croatiaId = croatia?.id;
 
+  const ireland = await prisma.country.findFirst({
+    where: { name: "Ireland" },
+  });
+  const irelandId = ireland?.id;
+
+  const emirates = await prisma.country.findFirst({
+    where: { name: "United Arab Emirates" },
+  });
+  const emiratesId = emirates?.id;
+
   // add initial data about airports
   await prisma.airport.create({
     data: {
@@ -95,7 +105,7 @@ const main = async () => {
     data: {
       ...initialAirlines[1],
       country: {
-        connect: { id: croatiaId },
+        connect: { id: irelandId },
       },
       airports: {
         connect: [{ id: zagrebAirportId }, { id: splitAirportId }],
@@ -111,7 +121,7 @@ const main = async () => {
     data: {
       ...initialAirlines[2],
       country: {
-        connect: { id: croatiaId },
+        connect: { id: emiratesId },
       },
       airports: {
         connect: [{ id: zagrebAirportId }, { id: zadarAirportId }],

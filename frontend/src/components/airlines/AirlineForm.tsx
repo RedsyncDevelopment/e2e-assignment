@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import useAppDispatch from "../../app/hooks/useAppDispatch";
+import useAppSelector from "../../app/hooks/useAppSelector";
+
 import { createAirline } from "../../features/airline/airlineSlice";
 import { Airline } from "../../types";
 import SelectCountry from "../UI/SelectCountry";

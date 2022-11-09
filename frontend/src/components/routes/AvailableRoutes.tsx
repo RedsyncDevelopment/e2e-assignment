@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { AiOutlineArrowRight, AiOutlineCheckCircle } from "react-icons/ai";
-import { useAppSelector } from "../../app/hooks";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import useAppSelector from "../../app/hooks/useAppSelector";
+import SelectAirports from "../UI/SelectAirports";
 import SelectCountry from "../UI/SelectCountry";
+import AvailableAirlines from "./AvailableAirlines";
 
 interface AvailableRoutesProps {}
 
@@ -43,76 +45,32 @@ const AvailableRoutes: React.FC<AvailableRoutesProps> = ({}) => {
         <AiOutlineArrowRight className="w-8 h-8" />
       </div>
       <div className="flex flex-col items-center space-y-4">
-        <div>Airport: </div>
-        {!departingCountry ? (
-          <div>Please Select a Country</div>
-        ) : (
-          <select
-            value={departingAirport}
-            onChange={(e) => setDepartingAirport(e.target.value)}
-            name="departing-airport"
-            className="p-4 border-2 w-96"
-          >
-            <option value="">-- Select an Airport --</option>
-            {airports.map((airport) =>
-              airport.country?.code === departingCountry ? (
-                <option key={airport.id} value={airport.id}>
-                  {airport.name}
-                </option>
-              ) : null
-            )}
-          </select>
-        )}
+        <SelectAirports
+          countryCode={departingCountry}
+          airportId={departingAirport}
+          airports={airports}
+          value={departingAirport}
+          onChange={(e) => setDepartingAirport(e.target.value)}
+          name="departing-airport"
+        />
       </div>
       <div className="flex flex-col items-center space-y-4">
-        <div className="flex flex-col items-center space-y-4">
-          <div>Airport: </div>
-          {!destinationCountry ? (
-            <div>Please Select a Country</div>
-          ) : (
-            <select
-              value={destinationAirport}
-              onChange={(e) => setDestinationAirport(e.target.value)}
-              name="departing-airport"
-              className="p-4 border-2 w-96"
-            >
-              <option value="">-- Select an Airport --</option>
-              {airports.map((airport) =>
-                airport.country?.code === destinationCountry ? (
-                  <option key={airport.id} value={airport.id}>
-                    {airport.name}
-                  </option>
-                ) : null
-              )}
-            </select>
-          )}
-        </div>
+        <SelectAirports
+          countryCode={destinationCountry}
+          airportId={destinationAirport}
+          airports={airports}
+          value={destinationAirport}
+          onChange={(e) => setDestinationAirport(e.target.value)}
+          name="departing-airport"
+        />
       </div>
       <div className="pt-16 col-span-2 flex flex-col items-center space-y-4">
         <p className="text-xl font-bold">Available Airlines on That Route:</p>
-        <ul className="flex flex-col gap-2">
-          {airlines.map((airline) => {
-            if (
-              airline.airports
-                ?.map((airport) => airport.id)
-                .includes(departingAirport) &&
-              airline.airports
-                ?.map((airport) => airport.id)
-                .includes(destinationAirport)
-            ) {
-              return (
-                <li key={airline.id} className="flex items-center gap-4">
-                  <span>
-                    <AiOutlineCheckCircle />
-                  </span>
-                  <span className="text-lg">{airline.name}</span>
-                </li>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </ul>
+        <AvailableAirlines
+          airlines={airlines}
+          departingAirport={departingAirport}
+          destinationAirport={destinationAirport}
+        />
       </div>
     </div>
   );
