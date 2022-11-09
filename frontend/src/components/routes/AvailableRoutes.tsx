@@ -28,7 +28,10 @@ const AvailableRoutes: React.FC<AvailableRoutesProps> = ({}) => {
         <SelectCountry
           countries={countries}
           value={departingCountry}
-          onChange={(e) => setDepartingCountry(e.target.value)}
+          onChange={(e) => {
+            setDepartingCountry(e.target.value);
+            setDepartingAirport("");
+          }}
           id="departing-country"
         />
       </div>
@@ -36,7 +39,10 @@ const AvailableRoutes: React.FC<AvailableRoutesProps> = ({}) => {
         <div>To: </div>
         <SelectCountry
           countries={countries}
-          onChange={(e) => setDestinationCountry(e.target.value)}
+          onChange={(e) => {
+            setDestinationCountry(e.target.value);
+            setDestinationAirport("");
+          }}
           value={destinationCountry}
           id="destination-country"
         />
