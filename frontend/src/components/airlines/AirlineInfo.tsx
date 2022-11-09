@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import useAppDispatch from "../../app/hooks/useAppDispatch";
-import { deleteAirline } from "../../reducers/airlineSlice";
+import { deleteAirline } from "../../app/reducers/airlineSlice";
+import useAppDispatch from "../../hooks/useAppDispatch";
 import { Airline } from "../../types";
+import FormButtons from "../UI/FormButtons";
 import UpdateAirline from "./UpdateAirline";
 
 interface AirlineInfoProps {
@@ -44,20 +45,11 @@ const AirlineInfo: React.FC<AirlineInfoProps> = ({ airline }) => {
           airline={airline}
         />
       )}
-      <div className="w-full flex space-x-2">
-        <button
-          onClick={() => setIsEditOpen((current) => !current)}
-          className="edit-btn"
-        >
-          {isEditOpen ? "Close" : "Edit"}
-        </button>
-        <button
-          onClick={() => deleteAirlineClick(airline.id!)}
-          className="delete-btn"
-        >
-          Delete
-        </button>
-      </div>
+      <FormButtons
+        isEditOpen={isEditOpen}
+        onEditClick={() => setIsEditOpen((current) => !current)}
+        onDeleteClick={() => deleteAirlineClick(airline.id!)}
+      />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import useAppSelector from "../../app/hooks/useAppSelector";
+import useAppSelector from "../../hooks/useAppSelector";
 import SelectAirports from "../UI/SelectAirports";
 import SelectCountry from "../UI/SelectCountry";
 import AvailableAirlines from "./AvailableAirlines";

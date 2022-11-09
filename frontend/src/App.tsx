@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import useAppDispatch from "./app/hooks/useAppDispatch";
+import { initializeAirlines } from "./app/reducers/airlineSlice";
+import { initializeAirports } from "./app/reducers/airportSlice";
+import { initializeCountries } from "./app/reducers/countrySlice";
 import Airlines from "./components/airlines/Airlines";
 import Airports from "./components/airports/Airports";
 import Home from "./components/home/Home";
 import AvailableRoutes from "./components/routes/AvailableRoutes";
 import NotFound from "./components/UI/NotFound";
-import { initializeAirlines } from "./reducers/airlineSlice";
-import { initializeAirports } from "./reducers/airportSlice";
-import { initializeCountries } from "./reducers/countrySlice";
+import useAppDispatch from "./hooks/useAppDispatch";
 
 function App() {
   const dispatch = useAppDispatch();

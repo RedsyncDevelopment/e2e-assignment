@@ -1,7 +1,7 @@
 import { GoogleMap, InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useState } from "react";
-import useAppSelector from "../../app/hooks/useAppSelector";
-import useInitialMapSetup from "../../app/hooks/useInitialMapSetup";
+import useAppSelector from "../../hooks/useAppSelector";
+import useInitialMapSetup from "../../hooks/useInitialMapSetup";
 
 import { GoogleLatLng } from "../../types";
 import { center, options } from "../../utils/constants";

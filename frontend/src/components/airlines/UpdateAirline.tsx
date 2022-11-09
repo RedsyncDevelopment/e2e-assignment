@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import useAppDispatch from "../../app/hooks/useAppDispatch";
-import useAppSelector from "../../app/hooks/useAppSelector";
-import { updateAirline } from "../../reducers/airlineSlice";
+import { updateAirline } from "../../app/reducers/airlineSlice";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppSelector from "../../hooks/useAppSelector";
 import { Airline } from "../../types";
 import CheckboxAirports from "../UI/CheckboxAirports";
 import SelectCountry from "../UI/SelectCountry";

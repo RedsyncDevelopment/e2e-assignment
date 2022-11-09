@@ -1,5 +1,5 @@
 import React from "react";
-import useAppSelector from "../../app/hooks/useAppSelector";
+import useAppSelector from "../../hooks/useAppSelector";
 
 import AirportForm from "./AirportForm";
 import AirportInfo from "./AirportInfo";

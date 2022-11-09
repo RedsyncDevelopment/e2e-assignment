@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import useAppDispatch from "../../app/hooks/useAppDispatch";
-import useAppSelector from "../../app/hooks/useAppSelector";
-
-import { updateAirport } from "../../reducers/airportSlice";
+import { updateAirport } from "../../app/reducers/airportSlice";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppSelector from "../../hooks/useAppSelector";
 import { Airport } from "../../types";
 import CheckboxAirlines from "../UI/CheckboxAirlines";
 import SelectCountry from "../UI/SelectCountry";
@@ -22,6 +21,7 @@ const UpdateAirport: React.FC<UpdateAirportProps> = ({ airport, onUpdate }) => {
     airport.country?.code
   );
   const [isAirlineChecked, setIsAirlineChecked] = useState<boolean[]>([]);
+
   const [inputLat, setInputLat] = useState<string>(
     airport.location.lat.toString()
   );
